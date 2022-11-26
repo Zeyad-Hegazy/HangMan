@@ -257,7 +257,8 @@ hr {
 	background-color: #222;
 }
 
-.popUp {
+.popUp,
+.won {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -274,6 +275,12 @@ hr {
 	font-size: 30px;
 	font-weight: bold;
 	visibility: hidden;
+	text-align: center;
+}
+.won h3 {
+	color: green;
+	margin-top: -3px;
+	font-size: 50px;
 }
 
 .popUp h3 {
@@ -282,7 +289,14 @@ hr {
 	font-size: 50px;
 }
 
-.popUp button {
+.answer {
+	margin-top: -20px;
+	font-weight: bold;
+	text-transform: capitalize;
+}
+
+.popUp button,
+.won button {
 	height: 50px;
 	width: 110px;
 	cursor: pointer;

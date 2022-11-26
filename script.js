@@ -32,7 +32,7 @@ let words = {
 		"messi",
 		"Ronaldo",
 	],
-	countries: ["Egypt", "Qatar", " unitsia", "turkey"],
+	countries: ["Egypt", "Qatar", "tunisia", "turkey"],
 };
 
 let allKays = Object.keys(words);
@@ -91,9 +91,12 @@ document.addEventListener("click", (e) => {
 	}
 });
 let popUp = document.querySelector(".popUp");
+let won = document.querySelector(".won");
 let refresh = document.getElementById("refresh");
+let answer = document.getElementById("answer");
 
 function endGame() {
+	answer.append(`The Word Is : ${randomWord}`);
 	letters.style.pointerEvents = "none";
 	refresh.addEventListener("click", () => {
 		window.location.reload();
