@@ -185,6 +185,7 @@ hr {
 .hangman-draw.wrong-8 .the-legs {
 	display: block;
 }
+
 .letters {
 	flex: 1;
 	display: flex;
@@ -277,6 +278,7 @@ hr {
 	visibility: hidden;
 	text-align: center;
 }
+
 .won h3 {
 	color: green;
 	margin-top: -3px;

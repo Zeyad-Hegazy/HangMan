@@ -1,6 +1,8 @@
-let alphabet = "abcdefghijklmnopqrstuvwxyz";
+const alphabet = "abcdefghijklmnopqrstuvwxyz";
 let alphabetArray = Array.from(alphabet);
-let letters = document.querySelector(".letters");
+
+const letters = document.querySelector(".letters");
+
 alphabetArray.forEach((letter) => {
 	let spanLetter = document.createElement("span");
 	let letterInSpan = document.createTextNode(letter);
@@ -24,7 +26,7 @@ let words = {
 		"UP",
 		"lion King",
 	],
-	people: [
+	celebrities: [
 		"albert einstein",
 		"isaac newton",
 		"Ahmed Zewil",
@@ -56,9 +58,10 @@ lettersAndSpaces.forEach((letter) => {
 	letterGuessContaier.appendChild(emptyspan);
 });
 
-let guessSpans = document.querySelectorAll(".letters-guess span");
+const guessSpans = document.querySelectorAll(".letters-guess span");
+const theDraw = document.querySelector(".hangman-draw");
 let wrongAttempts = 0;
-let theDraw = document.querySelector(".hangman-draw");
+let correctAttempts = [];
 
 document.addEventListener("click", (e) => {
 	let theStatus = false;
@@ -69,6 +72,9 @@ document.addEventListener("click", (e) => {
 		lettersAndSpaces.forEach((wordLetter, wordIndex) => {
 			if (clickedLetter === wordLetter) {
 				theStatus = true;
+
+				correctAttempts.push(true);
+
 				guessSpans.forEach((span, spanIndex) => {
 					if (wordIndex === spanIndex) {
 						span.innerHTML = wordLetter;
@@ -76,8 +82,9 @@ document.addEventListener("click", (e) => {
 				});
 			}
 		});
-		if (theStatus !== true) {
-			wrongAttempts++;
+
+		if (theStatus === false) {
+			++wrongAttempts;
 			theDraw.classList.add(`wrong-${wrongAttempts}`);
 			let failAudio = new Audio("./327736__distillerystudio__error-03.wav");
 			failAudio.play();
@@ -87,19 +94,34 @@ document.addEventListener("click", (e) => {
 		} else {
 			let successAudio = new Audio("./171671__leszek-szary__success-1.wav");
 			successAudio.play();
+			if (lettersAndSpaces.length === correctAttempts.length) {
+				wonGame();
+			}
 		}
 	}
 });
-let popUp = document.querySelector(".popUp");
-let won = document.querySelector(".won");
-let refresh = document.getElementById("refresh");
-let answer = document.getElementById("answer");
+
+const popUp = document.querySelector(".popUp");
+const won = document.querySelector(".won");
+const answer = document.getElementById("answer");
+const refresh = document.querySelectorAll(".refresh");
+
+function wonGame() {
+	won.style.visibility = "visible";
+	refresh.forEach((e) => {
+		e.addEventListener("click", () => {
+			window.location.reload();
+		});
+	});
+}
 
 function endGame() {
 	answer.append(`The Word Is : ${randomWord}`);
 	letters.style.pointerEvents = "none";
-	refresh.addEventListener("click", () => {
-		window.location.reload();
+	refresh.forEach((e) => {
+		e.addEventListener("click", () => {
+			window.location.reload();
+		});
 	});
 	popUp.style.visibility = "visible";
 }
